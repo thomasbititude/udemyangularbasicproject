@@ -9,8 +9,8 @@ import { RecipeService } from '../recipe.service';
   styleUrls: ['./recipe-details.component.css'],
 })
 export class RecipeDetailsComponent implements OnInit {
-  recipe: any;
-  id: any;
+  recipe: Recipe;
+  id: number;
 
   constructor(
     private recipeService: RecipeService,
@@ -31,5 +31,9 @@ export class RecipeDetailsComponent implements OnInit {
 
   onEditRecipe(){
 this.router.navigate(['edit'],{relativeTo:this.route})
+  }
+  onDeleteRecipe(){
+    this.recipeService.deleteRecipe(this.id);
+    this.router.navigate(['/recipes'])
   }
 }
