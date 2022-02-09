@@ -3,6 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Recipe } from '../recipe.model';
 import { RecipeService } from '../recipe.service';
+import { DataStorageService } from 'src/app/shared/data-storage.service';
+
+
 
 @Component({
   selector: 'app-recipe-list',
@@ -14,10 +17,11 @@ recipes: Recipe[];
 subscription: Subscription;
 
   constructor(private recipeService:RecipeService,
+    private dataStorageService:DataStorageService,
     private router:Router,
     private route:ActivatedRoute) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.subscription = this.recipeService.recipesChanged
     .subscribe(
       (recipes: Recipe[])=>{
@@ -25,6 +29,7 @@ subscription: Subscription;
       }
     )
     this.recipes = this.recipeService.getRecipe();
+    this.dataStorageService.fetchRecipes().subscribe();
   }
 onNewRecipe(){
 this.router.navigate(['new'],{relativeTo:this.route});
