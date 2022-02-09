@@ -68,7 +68,7 @@ export class AuthService {
       );
   }
 
-  autuLogin() {
+  autoLogin() {
     const userData: {
       email: string;
       id: string;
